@@ -7,6 +7,16 @@ public class Gun {
     int maxBullets;
     char shootingMode; // S for single, A for automatic 5 bullets (per shot)
 
+    public Gun(String gunType) {
+        this.shootingMode = 'S';
+        this.maxBullets = 1000;
+        this.gunType = "Heckler";
+        reloadBullets();
+    }
+
+    public String getGunType() {
+        return gunType;
+    }
 
     public void reloadBullets() {
         bullets = maxBullets;
@@ -16,13 +26,6 @@ public class Gun {
     }
     public void setShootingMode(char shootingMode) {
         this.shootingMode = shootingMode;
-    }
-
-    public Gun() {
-        this.shootingMode = 'S';
-        this.maxBullets = 1000;
-        this.gunType = "ak47";
-        reloadBullets();
     }
     public void changeShootingMode() {
         if (shootingMode == 'S')
@@ -41,7 +44,8 @@ public class Gun {
                 bullets -= 5;
                 System.out.println("-----");
             }
-        }
+        }else
+            System.out.println("The Gun is out of bullets!");
     }
 
     public void shootGun() {
@@ -49,7 +53,7 @@ public class Gun {
         this.shootGunBullets();
 
     }
-    public void getGunType() {
+    public void changeGunType() {
         if (bullets > 0)
         {
             if (Objects.equals(gunType, "AK47")){
@@ -64,7 +68,8 @@ public class Gun {
                 bullets -=3;
                 System.out.println("###");
             }
-        }
+        }else
+            System.out.println("You are out of bullets!!");
     }
 
     public void setGunType(String gunType) {

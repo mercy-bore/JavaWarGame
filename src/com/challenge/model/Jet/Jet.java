@@ -22,6 +22,9 @@ public class Jet {
         reloadJetMissils();
         reloadJetBullets();
     }
+    public String getJetModelType() {
+        return jetModelType;
+    }
     public void reloadJetMissils() {
         missiles = maxJetMissiles;
     }
@@ -57,7 +60,7 @@ public class Jet {
     public void shootJetBullets() {
         if (bullets > 0)
         {
-            if (Objects.equals(jetModelType, "GAU-22/A")){
+            if (Objects.equals(jetModelType, "F_35")){
                 bullets --;
                 System.out.println(">");
             }
@@ -65,16 +68,15 @@ public class Jet {
                 bullets -= 5;
                 System.out.println("^^^^^");
             }
-        }
+        }else
+            System.out.println("The Jet is out of bullets!!");
     }
 
     public void shootJet() {
         System.out.println(shootingMode);
         this.shootJetBullets();
     }
-    public String getJetModelType() {
-        return jetModelType;
-    }
+
 
     public void setJetModelType(String jetModelType) {
         this.jetModelType = jetModelType;

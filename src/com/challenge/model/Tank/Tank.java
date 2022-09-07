@@ -1,10 +1,8 @@
 package com.challenge.model.Tank;
 import com.challenge.model.Enums.Artilery;
 import com.challenge.model.Enums.Day;
-import java.util.Objects;
 
 public class Tank {
-    private String tankNumber;
     private final String tankModelType; // T-72
     int bullets;
     int maxTankBullets;
@@ -44,7 +42,7 @@ public class Tank {
         this.weaponType = weaponType;
     }
     public int getTankShootingMode() {
-        return weaponType;
+        return shootingMode;
     }
 
     public int getBullets() {
@@ -78,7 +76,8 @@ public class Tank {
                 bullets -= 5;
                 System.out.println("£££££");
             }
-        }
+        }else
+            System.out.println("Tank is out of bullets!!");
     }
 
     public void shootTank() {

@@ -4,54 +4,51 @@ import com.challenge.model.Jet.Jet;
 import com.challenge.model.Tank.Tank;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Army {
     private final String name;
-    private Soldier[] soldiers;
-    private Gun[] guns;
-
-    private Tank[] tanks;
-    private Jet[] jets;
+    private ArrayList<Soldier> soldiers;
+    private ArrayList<Gun> guns;
+    private ArrayList<Tank> tanks;
+    private ArrayList<Jet> jets;
 
     public Army(String name) {
         this.name = name;
-    }
-
-    public Soldier[] getSoldiers() {
-        return soldiers;
-    }
-
-    public void setSoldiers(Soldier[] soldiers) {
-        this.soldiers = soldiers;
-    }
-
-    public Gun[] getGuns() {
-        return guns;
-    }
-
-    public void setGuns(Gun[] guns) {
-        this.guns = guns;
-    }
-
-    public Tank[] getTanks() {
-        return tanks;
-    }
-
-    public void setTanks(Tank[] tanks) {
-        this.tanks = tanks;
-    }
-
-    public Jet[] getJets() {
-        return jets;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setJets(Jet[] jets) {
+    public ArrayList<Soldier> getSoldiers() {
+        return soldiers;
+    }
+
+    public ArrayList<Gun> getGuns() {
+        return guns;
+    }
+
+    public void setGuns(ArrayList<Gun> guns) {
+        this.guns = guns;
+    }
+
+    public ArrayList<Tank> getTanks() {
+        return tanks;
+    }
+
+    public void setTanks(ArrayList<Tank> tanks) {
+        this.tanks = tanks;
+    }
+
+    public ArrayList<Jet> getJets() {
+        return jets;
+    }
+
+    public void setJets(ArrayList<Jet> jets) {
         this.jets = jets;
     }
 
+    public void setSoldiers(ArrayList<Soldier> soldiers) {
+        this.soldiers = soldiers;
+    }
 }

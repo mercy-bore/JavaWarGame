@@ -1,8 +1,11 @@
 package com.challenge;
 import com.challenge.controller.WarGameWorld;
 
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class WarGame {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, FileNotFoundException {
         new WarGameWorld().run();
     }
 }
