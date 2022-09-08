@@ -6,20 +6,20 @@ import com.challenge.model.Enums.DifficultyLevel;
 import com.challenge.model.Threads.GunThread;
 import com.challenge.model.Threads.JetThread;
 import com.challenge.model.Threads.TankThread;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import static com.challenge.model.Enums.DifficultyLevel.*;
 
 
 public class WarGameWorld {
-    private static  int maxSoldiers=10;
+    private static final int maxSoldiers=10;
     public static Army ally;
     public static Army enemy;
     public  static int choice;
 
-    public static DifficultyLevel difficultyLevel = DifficultyLevel.EASY;
+    public static DifficultyLevel difficultyLevel = EASY;
 
     public WarGameWorld() {
         this.setupGame();
@@ -48,10 +48,9 @@ public class WarGameWorld {
 
     private void runGame() {
         GunThread t1 = new GunThread();
+        t1.start();
         TankThread t2 = new TankThread();
         JetThread t3 = new JetThread();
-        t1.start();
-
         try {
             t1.join();
 
@@ -75,6 +74,19 @@ public class WarGameWorld {
                 return false;
         return true;
     }
+    private int deadSoldiers(Army army){
+        int alive = 0;
+        for (int k = 0; k < army.getSoldiers().size(); k++){
+            if (army.getSoldiers().get(k).isAlive()) {
+                alive = alive + 1;
+            }
+        }
+        return army.getSoldiers().size() - alive;
+
+    }
+
+
+
     private boolean registration () throws FileNotFoundException, InterruptedException {
         try {
             File obj = new File("Registration.txt");
@@ -120,47 +132,52 @@ public class WarGameWorld {
         System.out.println("===============  We need to defend our country ===================");
         Thread.sleep(2000);
         System.out.println();
+
+
         while(true) {
             // - Setup the game [Soldiers, Army (Ally, Enemy), Weapon Arsenal]
             // - Run the game [ Soldiers shoot at enemy, Control Weapons + Arsenal ]
             // - Control the game. Determine, when the game ends...
             // [1 - All soldiers are dead,
             // [2 - No weapon has bullets
-            int choice;
-            Scanner console = new Scanner(System.in);
-            System.out.println();
-            System.out.println("=============== *** WarGame Menu *** ===================");
-            System.out.print("         Select: \n                  1    To play the game\n                  0    To exit the game \n ");
-            System.out.println();
-            choice = console.nextInt();
+
+            System.out.println("***********************  Profile Setup  *********************");
+
             if (registration()){
-                switch (choice) {
-                case 1:
-                    Thread.sleep(3000);
+
                     while (true) {
-                        if (allSoldiersAreDead(ally) && allSoldiersAreDead(enemy)){
-                            System.out.println("All soldiers are dead");
+                        if (allSoldiersAreDead(ally) && allSoldiersAreDead(enemy)) {
+                            System.out.println();
+                            System.out.println("=== ****** GAME OVER ****** ===");
+                            System.out.println();
+                            System.out.println("Here is the game summary .......");
+                            Thread.sleep(1500);
+                            System.out.println("......  find out if you won or lost.");
+                            System.out.println();
+                            Thread.sleep(2500);
+                            if (deadSoldiers(ally) < deadSoldiers(enemy))
+                                System.out.println("     ************* Congratulations!!  You have won the Game !! *************     ");
+                            else
+                                System.out.println("You Lost.Try again. ");
+
                             break;
-                        }
-                        else {
+                        } else {
                             this.runGame();
                         }
-                        if (noWeaponHasBullets(ally) && noWeaponHasBullets(enemy)){
+                        if (noWeaponHasBullets(ally) && noWeaponHasBullets(enemy)) {
                             break;
                         }
 
                         try {
                             Thread.sleep(2000);
-                        }catch (InterruptedException e) {
+                        } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
-                        break;
-                case 0:
-                    System.out.println("You are now exiting the game!!");
-                    return;
-                }
-            }break;
+                    Thread.sleep(3000);
+                    break;
+                }else
+                System.out.println("Error");
         }
     }
 }

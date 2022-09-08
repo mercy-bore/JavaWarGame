@@ -1,4 +1,6 @@
 package com.challenge;
+import com.challenge.model.Enums.DifficultyLevel;
+
 import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -6,8 +8,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
 
+import static com.challenge.model.Enums.DifficultyLevel.*;
+
 public class UserRegistration {
+    public static DifficultyLevel difficultyLevel = EASY;
+
     public void register() throws FileNotFoundException, InterruptedException {
+
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter User Name: ");
@@ -117,9 +124,26 @@ public class UserRegistration {
             while (content.hasNextLine()) {
                 String data = content.nextLine();
                 if (data.equals(x)) {
-                    System.out.println("Login Successful!");
+                    System.out.println( "Login Successful!");
+                    System.out.println("******************* Welcome " + Uname + "! ******************* ");
                     System.out.println();
                     Thread.sleep(2000);
+                    int selection;
+                    Scanner input =new Scanner(System.in);
+                    System.out.println("Select Game Mode:\n 1. EASY\n 2. MEDIUM\n 3. HARD");
+                    selection = input.nextInt();
+                    if(selection == 1){
+                        difficultyLevel = EASY;
+                    }else if(selection ==2){
+                        difficultyLevel = MEDIUM;
+                    }
+                    else if(selection == 3){
+                        difficultyLevel = HARD;
+                    }
+                    else
+                        System.out.println("Enter a correct option.");
+                    System.out.println("                       *** You have chosen mode: " + selection + " ***");
+                    input.close();
                     System.out.println("====== **************** Welcome to the War Game Application.**************** ======");
                     System.out.println();
                     System.out.println();

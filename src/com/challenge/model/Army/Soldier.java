@@ -4,8 +4,9 @@ import com.challenge.model.Jet.Jet;
 import com.challenge.model.Tank.Tank;
 import java.util.Random;
 
-public class Soldier {
+public class Soldier  {
     private boolean alive;
+    private  boolean dead;
     private Gun gun;
     private Tank tank;
     private Jet jet;
@@ -14,6 +15,7 @@ public class Soldier {
     public Soldier(String militaryId) {
         this.militaryId = militaryId;
         this.alive = true;
+        this.dead = true;
         this.gun = new Gun("Heckler");
         this.tank = new Tank("Shupanov p3 1937");
         this.jet = new Jet("F_35");
@@ -24,6 +26,8 @@ public class Soldier {
     public boolean isAlive() {
         return alive;
     }
+    public void setDead(boolean alive){this.alive = !alive;}
+    public boolean isDead(){return dead;}
 
     public boolean gunHasBullets() {
         return this.gun.getBullets() > 0;
@@ -56,20 +60,20 @@ public class Soldier {
     public void setMilitaryId(String militaryId) {
         this.militaryId = militaryId;
     }
-    public void shoot(){
-        if(this.alive) {
-            int weapon = new Random().nextInt(10);
-            if (weapon % 2 == 0) {
-                System.out.println(this.militaryId + " shooting a gun  on mode: " + gun.getGunShootingMode());
-                this.gun.shootGunBullets();
-            }  else if (weapon % 5 == 0) {
-                System.out.println(this.militaryId + " shooting a tank on mode:  " + tank.getShootingMode());
-                this.tank.shootTankBullets();
-            } else if (weapon % 3 != 0) {
-                System.out.println(this.militaryId + " shooting a jet of type: " + jet.getJetModelType());
-                this.jet.shootJetBullets();
-            }
+    public void shoot(){if(this.alive) {
+        int weapon = new Random().nextInt(10);
+        if (weapon % 2 == 0) {
+            System.out.println(this.militaryId + " shooting a gun  on mode: " + gun.getGunShootingMode());
+            this.gun.shootGunBullets();
+        }  else if (weapon % 3 == 0) {
+            System.out.println(this.militaryId + " shooting a tank on mode:  " + tank.getShootingMode());
+            this.tank.shootTankBullets();
+        } else if (weapon % 5 == 0) {
+            System.out.println(this.militaryId + " shooting a jet of type: " + jet.getJetModelType());
+            this.jet.shootJetBullets();
         }
+    }
+
     }
     public void shot() {
         this.alive = false;
